@@ -1,12 +1,13 @@
 from tkinter import *
 
 
-def receive():
+def receive(a):
         t = Tk()
+        a.destroy()
 
         t.title("Bloodbank/Receiver")
 
-        t.geometry("500x300+120+120")
+        t.geometry("500x500+120+120")
 
         name1 = Label(t, text="Enter Name")
         name1.grid(row=1, column=1)

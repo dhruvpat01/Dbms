@@ -1,7 +1,7 @@
 from tkinter import *
 root=Tk()
 from Regsiter import *
-from nextpage import *
+
 from Login import *
 class blood_bank:
  def __init__(self):
@@ -24,4 +24,3 @@ class blood_bank:
 
 if __name__ == '__main__':
  user=blood_bank()
-
