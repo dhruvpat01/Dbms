@@ -1,0 +1,45 @@
+from tkinter import *
+from tkinter import ttk
+
+
+class register:
+    def __init__(self):
+        loot = Tk()
+        loot.geometry("500x500+120+120")
+        empty = Label(loot, text=" ")
+        empty.grid(row=0)
+        name1 = Label(loot, text="Enter Name")
+        name1.grid(row=1, column=1)
+        name2 = Entry(loot)
+        name2.grid(row=1, column=2)
+        psex = Label(loot, text="Enter Sex Of the patient")
+        psex.grid(row=3, column=1)
+        v = StringVar(loot, value="2")
+        radiobutton1 = Radiobutton(loot, text="Male", variable=v, value="Male")
+        radiobutton1.grid(row=3, column=2)
+        radiobutton2 = Radiobutton(loot, text="Female", variable=v, value="Female")
+        radiobutton2.grid(row=3, column=3)
+        radiobutton3 = Radiobutton(loot, text="Other", variable=v, value="Other")
+        radiobutton3.grid(row=3, column=4)
+        page1 = Label(loot, text="Enter Age")
+        page1.grid(row=4, column=1)
+        page2 = Entry(loot)
+        page2.grid(row=4, column=2)
+        Label1 = Label(loot, text="Login_ID/Email_ID :")
+        Label1.grid(row=5, column=1)
+        l_id = Entry(loot)
+        l_id.get()
+
+        l_id.grid(row=5, column=2)
+        Pass_Label = Label(loot, text="Password :")
+        Pass_Label.grid(row=6, column=1)
+        Password_box = Entry(loot, show="*")
+        Password_box.grid(row=6, column=2)
+        Password_box.get()
+        Pass_Label1 = Label(loot, text=" Confirm Password :")
+        Pass_Label1.grid(row=7, column=1)
+        Password_box1 = Entry(loot, show="*")
+        Password_box1.grid(row=7, column=2)
+        Button_Submit = Button(loot, text="Register", padx=30, pady=10,
+                               command=lambda: loginbut(l_id.get(), Password_box.get(), Password_box1.get(), loot))
+        Button_Submit.grid(row=8, column=2)
