@@ -3,6 +3,7 @@
 
 from Receive import *
 from Donate import *
+from Fullscrn import *
 import re
 
 
@@ -28,6 +29,8 @@ def page(a):
     Button_Submit = Button(boot, text="Login", padx=30, pady=10,
                            command=lambda: loginbut(l_id.get(), Password_box.get(), boot))
     Button_Submit.grid(row=6, column=3)
+    full2=FullScreenApp(boot)
+    boot.mainloop()
 
 
 
@@ -58,3 +61,5 @@ def loginbut(a, b, d):
                          command=lambda: receive(root1))
         Button4.place(relx=0.35, rely=0.49, height=53, width=100)
         Button4.configure()
+        full7=FullScreenApp(root1)
+        root1.mainloop()

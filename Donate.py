@@ -1,5 +1,5 @@
 from tkinter import *
-
+from Fullscrn import *
 
 def donate(a):
     root2 = Tk()
@@ -24,5 +24,5 @@ def donate(a):
     select = OptionMenu(root2, variable, *hospital_names)
     variable.set("Blood Bank Names")
     select.grid(row=4, column=1)
-
+    full5=FullScreenApp(root2)
     root2.mainloop()

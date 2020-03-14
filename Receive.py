@@ -1,5 +1,5 @@
 from tkinter import *
-
+from Fullscrn import *
 
 def receive(a):
     t = Tk()
@@ -68,5 +68,5 @@ def receive(a):
     anumber1.grid(row=7, column=1)
     anumber2 = Entry(t)
     anumber2.grid(row=7, column=2)
-
+    full4=FullScreenApp(t)
     t.mainloop()

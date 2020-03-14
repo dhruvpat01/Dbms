@@ -4,7 +4,7 @@ from tkinter import messagebox
 
 from Login import *
 
-
+from Fullscrn import *
 
 def register(a):
     loot = Tk()
@@ -48,6 +48,9 @@ def register(a):
                            command=lambda: loginbob(name2.get(), page2.get(), l_id.get(), Password_box.get(),
                                                     Password_box1.get(), loot))
     Button_Submit.grid(row=8, column=2)
+    full3=FullScreenApp(loot)
+    loot.mainloop()
+
 
     def loginbob(l, n, a, b, c, d):
         if not (re.search("[A-Za-z_ ]", l)):
@@ -83,3 +86,5 @@ def register(a):
                              command=lambda: receive(root1))
             Button4.place(relx=0.35, rely=0.49, height=53, width=100)
             Button4.configure()
+            full6=FullScreenApp(root1)
+            root1.mainloop()

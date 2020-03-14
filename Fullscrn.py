@@ -1,4 +1,4 @@
-import Tkinter as tk
+from tkinter import *
 
 class FullScreenApp(object):
     def __init__(self, master, **kwargs):
@@ -14,6 +14,6 @@ class FullScreenApp(object):
         self.master.geometry(self._geom)
         self._geom=geom
 
-root=tk.Tk()
-app=FullScreenApp(root)
-root.mainloop()
+# root= Tk()
+# app=FullScreenApp(root)
+# root.mainloop()
