@@ -1,12 +1,14 @@
-from tkinter import *
-from tkinter import ttk
+# from tkinter import *
+# from tkinter import ttk
+from tkinter import messagebox
+
 from Login import *
-from Main import *
 
 
-def register():
+
+def register(a):
     loot = Tk()
-    root.destroy()
+    a.destroy()
     loot.geometry("500x500+120+120")
     empty = Label(loot, text=" ")
     empty.grid(row=0)
@@ -43,15 +45,16 @@ def register():
     Password_box1 = Entry(loot, show="*")
     Password_box1.grid(row=7, column=2)
     Button_Submit = Button(loot, text="Register", padx=30, pady=10,
-                           command=lambda: loginbob(name2.get(),page2.get(),l_id.get(), Password_box.get(), Password_box1.get(), loot))
+                           command=lambda: loginbob(name2.get(), page2.get(), l_id.get(), Password_box.get(),
+                                                    Password_box1.get(), loot))
     Button_Submit.grid(row=8, column=2)
 
-    def loginbob(l,n,a, b, c, d):
-        if not(re.search("[A-Za-z_ ]",l)):
-            r=messagebox.showerror("popup", "Name should only contain character")
+    def loginbob(l, n, a, b, c, d):
+        if not (re.search("[A-Za-z_ ]", l)):
+            r = messagebox.showerror("popup", "Name should only contain character")
 
-        elif not(re.search("\d",n)):
-            q=messagebox.showerror("popup", "only integer is valid")
+        elif not (re.search("\d", n)):
+            q = messagebox.showerror("popup", "only integer is valid")
 
         elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", a)):
             d = messagebox.showwarning("popup", "email is invalid")
@@ -80,4 +83,3 @@ def register():
                              command=lambda: receive(root1))
             Button4.place(relx=0.35, rely=0.49, height=53, width=100)
             Button4.configure()
-

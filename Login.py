@@ -1,13 +1,13 @@
-from tkinter import *
-from tkinter import messagebox
-from Main import *
-from Receive import*
+# from tkinter import *
+# from tkinter import messagebox
+
+from Receive import *
 from Donate import *
 import re
 
-def page():
-    root.destroy()
 
+def page(a):
+    a.destroy()
     boot = Tk()
     boot.geometry("500x500+120+120")
 
@@ -30,7 +30,8 @@ def page():
     Button_Submit.grid(row=6, column=3)
 
 
-def loginbut(a, b,  d):
+
+def loginbut(a, b, d):
     if not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", a)):
         d = messagebox.showwarning("popup", "email is invalid")
 
@@ -52,11 +53,8 @@ def loginbut(a, b,  d):
         Button3 = Button(Frame1)
         Button3.place(relx=0.35, rely=0.69, height=53, width=100)
         Button3.configure(background="#d9d9d9", text="Donate", font=("Courier", 15), width=100,
-                          command=lambda :donate(root1))
+                          command=lambda: donate(root1))
         Button4 = Button(Frame1, background="#d9d9d9", text="Request", fg='black', font=("Courier", 15), width=100,
-                         command=lambda :receive(root1))
+                         command=lambda: receive(root1))
         Button4.place(relx=0.35, rely=0.49, height=53, width=100)
         Button4.configure()
-
-
-
