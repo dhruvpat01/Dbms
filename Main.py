@@ -16,10 +16,10 @@ class blood_bank:
 
         self.Button3 = Button(self.Frame1)
         self.Button3.place(relx=0.65, rely=0.69, height=103, width=400)
-        self.Button3.configure(background="#d9d9d9", text="Login", font=("Courier", 35), width=400, command=lambda :page(root))
+        self.Button3.configure(background="#d9d9d9", text="Login", font=("Times", 35), width=400, command=lambda :page(root))
         self.Button4 = Button(self.Frame1)
         self.Button4.place(relx=0.65, rely=0.49, height=103, width=400)
-        self.Button4.configure(background="#d9d9d9", text="Register", font=("Courier", 35), width=400, command=lambda :register(root))
+        self.Button4.configure(background="#d9d9d9", text="Register", font=("Times", 35), width=400, command=lambda :register(root))
         full1=FullScreenApp(root)
         root.mainloop()
 
