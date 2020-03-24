@@ -57,22 +57,24 @@ def register(a):
     Password_box1 = Entry(loot, show="*")
     Password_box1.place(relx=0.42, rely=0.73, height=33, width=200)
 
-    conn = sqlite3.connect("Blood_Bank.db")
-    c = conn.cursor()
-
-    def insert():
-        c.execute(
-            "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Age	INTEGER NOT NULL,Email	BLOB PRIMARY KEY,Password	BLOB NOT NULL,PhoneNumber INTEGER)")
-        c.execute('INSERT INTO User VALUES(?,?,?,?,?)',
-                  (name2.get(), page2.get(), l_id.get(), Password_box.get(), page2.get()))
-        conn.commit()
-
     Button_Submit = Button(Frame1, text="Register", padx=30, pady=10,font=("Times", 20),
-                           command=insert)
+                           command=lambda :loginbob(name2.get(),page2.get(),l_id.get(),Password_box.get(),Password_box1.get(),loot))
     Button_Submit.place(relx=0.35, rely=0.84, height=45, width=300)
 
     full3=FullScreenApp(loot)
     loot.mainloop()
+
+
+conn = sqlite3.connect("Blood_Bank.db")
+c = conn.cursor()
+
+def insert(l,n,a,b):
+    c.execute(
+        "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Age	INTEGER NOT NULL,Email	BLOB PRIMARY KEY,Password	BLOB NOT NULL,PhoneNumber INTEGER)")
+    c.execute('INSERT INTO User VALUES(?,?,?,?,?)',
+              (l, n, a, b, n))
+    conn.commit()
+
 
 
 def loginbob(l, n, a, b, c, d):
@@ -92,6 +94,7 @@ def loginbob(l, n, a, b, c, d):
         elif not (c == b):
             a = messagebox.showwarning("popup", "your passwords do not match")
         else:
+            insert(l, n, a, b)
             root1 = Tk()
             d.destroy()
             root1.title("Blood Bank")
