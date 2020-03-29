@@ -1,5 +1,7 @@
 from tkinter import *
 from Fullscrn import *
+from tkinter import messagebox
+
 
 def receive(a):
     t = Tk()
@@ -83,7 +85,20 @@ def receive(a):
     # number2.place(relx=0.42, rely=0.72, height=33, width=200)
 
 
-    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20))
+    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20),command=lambda :Output(email2.get(),pname2.get(),page2.get()))
     Button_Submit.place(relx=0.35, rely=0.82, height=45, width=300)
     full4=FullScreenApp(t)
     t.mainloop()
+
+
+def Output(a,b,c):
+    if not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", a)):
+        e = messagebox.showwarning("popup", "email is invalid")
+    elif not (re.search("[A-Za-z]{3,15}\s[A-Za-z]{3,10}", b)):
+        f = messagebox.showerror("popup", "Invalid format")
+    elif not (re.search("\d\d", c)):
+        g = messagebox.showerror("popup", "Invalid age")
+
+
+
+

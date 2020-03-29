@@ -1,5 +1,7 @@
 from tkinter import *
 from Fullscrn import *
+from tkinter import messagebox
+
 import sqlite3
 
 def donate(a):
@@ -87,20 +89,22 @@ conn=sqlite3.connect("Blood_Bank.db")
 c=conn.cursor()
 
 def add(e,b):
-
     c.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags+1 where Blood_Group=(?)",(b))
     c.execute("INSERT INTO Donor VALUES(?,?)",(e,b))
     conn.commit()
 
 def display(e,b,d):
-    # add(e,b)
-    dumb=Tk()
+    if not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", e)):
+     d= messagebox.showwarning("popup", "email is invalid")
+    else:
+        add(e, b)
+        dumb = Tk()
 
-    d.destroy()
-    label1=Label(dumb,text=e)
-    label1.pack()
+        d.destroy()
+        label1 = Label(dumb, text=e)
+        label1.pack()
 
-    label2 =Label (dumb, text=b)
-    label2.pack()
-    full9=FullScreenApp(dumb)
-    dumb.mainloop()
+        label2 = Label(dumb, text=b)
+        label2.pack()
+        full9 = FullScreenApp(dumb)
+        dumb.mainloop()
