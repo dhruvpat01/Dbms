@@ -18,6 +18,13 @@ def receive(a):
     # name2.get()
     # name2.place(relx=0.42, rely=0.07, height=33, width=200)
 
+    email1 = Label(Frame1)
+    email1.place(relx=0.25, rely=0.05, height=33, width=200)
+    email1.configure(background="#d9d9d9", text="Enter Username", font=("Times", 10), width=200)
+    email2 = Entry(t)
+    email2.get()
+    email2.place(relx=0.42, rely=0.07, height=33, width=500)
+
 
     pname1 = Label(Frame1)
     pname1.place(relx=0.25, rely=0.15, height=33, width=200)
@@ -37,10 +44,17 @@ def receive(a):
     radiobutton3 = Radiobutton(Frame1, text="Other", variable=v, value="Other",font=("Times", 10))
     radiobutton3.place(relx=0.65, rely=0.27)
 
+    page1 = Label(Frame1)
+    page1.place(relx=0.25, rely=0.37, height=33, width=200)
+    page1.configure(background="#d9d9d9", text="Enter Age", font=("Times", 10))
+    page2 = Entry(t)
+    page2.get()
+    page2.place(relx=0.42, rely=0.37, height=33, width=200)
+
     b = StringVar(Frame1)
     pblood = Label(t, text="Select Blood Group Required")
     pblood.configure(background="#d9d9d9",font=("Times", 10))
-    pblood.place(relx=0.26, rely=0.37,height=33,width=200)
+    pblood.place(relx=0.26, rely=0.47,height=33,width=200)
     values = ["A Positive",
               'A Negative',
               'B Positive',
@@ -51,14 +65,8 @@ def receive(a):
               'O Negative']
     b.set('Select Blood Type')
     dropdown = OptionMenu(t, b, *values)
-    dropdown.place(relx=0.42, rely=0.37,height=33,width=200)
+    dropdown.place(relx=0.42, rely=0.47,height=33,width=200)
 
-    page1 = Label(Frame1)
-    page1.place(relx=0.25, rely=0.52, height=33, width=200)
-    page1.configure(background="#d9d9d9", text="Enter Age", font=("Times", 10))
-    page2 = Entry(t)
-    page2.get()
-    page2.place(relx=0.42, rely=0.52, height=33, width=200)
 
     pamount1 = Label(Frame1)
     pamount1.place(relx=0.25, rely=0.65, height=33, width=200)
