@@ -63,7 +63,6 @@ def loginbut(a, b, d):
         else:
             conn = sqlite3.connect("Blood_Bank.db")
             c = conn.cursor()
-
             c.execute('SELECT * FROM User WHERE Email = ? and password = ?', (a, b))
             data = c.fetchone()
             conn.commit()
@@ -81,16 +80,16 @@ def loginbut(a, b, d):
                 Button3 = Button(Frame1)
                 Button3.place(relx=0.45, rely=0.35, height=53, width=200)
                 Button3.configure(background="#d9d9d9", text="Donate", font=("Courier", 25), width=200,
-                                  command=lambda: donate(root1))
+                                  command=lambda: donate(root1,a))
                 Button4 = Button(Frame1, background="#d9d9d9", text="Request", fg='black', font=("Courier", 25),
                                  width=200,
-                                 command=lambda: receive(root1))
+                                 command=lambda: receive(root1,a))
                 Button4.place(relx=0.45, rely=0.45, height=53, width=200)
                 Button4.configure()
                 full7 = FullScreenApp(root1)
                 root1.mainloop()
 
             else:
-                g = messagebox.showerror("popup", "Account doesnt exist")
+                f = messagebox.showerror("Error", "Account doesnt exist")
 
 

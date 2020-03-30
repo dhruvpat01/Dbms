@@ -1,10 +1,14 @@
+import sqlite3
 from tkinter import *
 from Fullscrn import *
-from tkinter import messagebox
 
-
-def receive(a):
+def receive(a,c):
     t = Tk()
+
+    pname2 = StringVar()
+    page2 = IntVar()
+    pblood=StringVar()
+    pamount2=IntVar()
     a.destroy()
     t.title("Blood Bank")
     t.geometry("500x500+120+120")
@@ -20,19 +24,17 @@ def receive(a):
     # name2.get()
     # name2.place(relx=0.42, rely=0.07, height=33, width=200)
 
-    email1 = Label(Frame1)
-    email1.place(relx=0.25, rely=0.05, height=33, width=200)
-    email1.configure(background="#d9d9d9", text="Enter Username", font=("Times", 10), width=200)
-    email2 = Entry(t)
-    email2.get()
-    email2.place(relx=0.42, rely=0.07, height=33, width=500)
+    # email1 = Label(Frame1)
+    # email1.place(relx=0.25, rely=0.05, height=33, width=200)
+    # email1.configure(background="#d9d9d9", text="Enter Username", font=("Times", 10), width=200)
+    # email2 = Entry(t)
+    # email2.place(relx=0.42, rely=0.07, height=33, width=500)
 
 
     pname1 = Label(Frame1)
     pname1.place(relx=0.25, rely=0.15, height=33, width=200)
     pname1.configure(background="#d9d9d9", text="Enter Patient  name", font=("Times", 10), width=200)
     pname2 = Entry(t)
-    pname2.get()
     pname2.place(relx=0.42, rely=0.17, height=33, width=500)
 
     psex = Label(Frame1)
@@ -74,7 +76,7 @@ def receive(a):
     pamount1.place(relx=0.25, rely=0.65, height=33, width=200)
     pamount1.configure(background="#d9d9d9", text="Enter Amount of blood required in bags", font=("Times", 8))
     pamount2 = Entry(t)
-    pamount2.get()
+
     pamount2.place(relx=0.42, rely=0.63, height=33, width=200)
 
     # number1 = Label(Frame1)
@@ -85,20 +87,28 @@ def receive(a):
     # number2.place(relx=0.42, rely=0.72, height=33, width=200)
 
 
-    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20),command=lambda :Output(email2.get(),pname2.get(),page2.get()))
-    Button_Submit.place(relx=0.35, rely=0.82, height=45, width=300)
+    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20),command=lambda: display1(pname2.get(),page2.get(),v.get(),b.get(),pamount2.get(),c,t))
+    Button_Submit.place(relx=0.35, rely=0.82, height=45, width=300,)
     full4=FullScreenApp(t)
     t.mainloop()
 
+conn = sqlite3.connect("Blood_Bank.db")
+co = conn.cursor()
 
-def Output(a,b,c):
-    if not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", a)):
-        e = messagebox.showwarning("popup", "email is invalid")
-    elif not (re.search("[A-Za-z]{3,15}\s[A-Za-z]{3,10}", b)):
-        f = messagebox.showerror("popup", "Invalid format")
-    elif not (re.search("\d\d", c)):
-        g = messagebox.showerror("popup", "Invalid age")
+def add(a,b,d,e,f,c):
+    co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-1 where Blood_Group=(?)",(e))
+    co.execute("INSERT INTO Receiver VALUES(?,?,?,?,?,?)", (a, d, b, e, f, c))
+    conn.commit()
 
+def display1(a, b,d,e,f,c,t):
+            add(a,b,d,e,f,c)
+            dumb = Tk()
 
+            t.destroy()
+            label1 = Label(dumb, text=e)
+            label1.pack()
 
-
+            label2 = Label(dumb, text="Blood received successfully")
+            label2.pack()
+            full9 = FullScreenApp(dumb)
+            dumb.mainloop()
