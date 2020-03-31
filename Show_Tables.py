@@ -11,7 +11,7 @@ def sho(b):
     Frame1.configure(borderwidth="2", background="#BD081C", width=500)
 
     show1 = Button(Frame1, background="#d9d9d9", text="Show User Table", fg='black', font=("Courier", 25), width=200,command=lambda :User(obj5))
-    show2 = Button(Frame1, background="#d9d9d9", text="Show Donor Table", fg='black', font=("Courier", 25), width=300,command=lambda :User(obj5))
+    show2 = Button(Frame1, background="#d9d9d9", text="Show Donor Table", fg='black', font=("Courier", 25), width=300,command=lambda :Donor(obj5))
     show3 = Button(Frame1, background="#d9d9d9", text="Show Receiver Table", fg='black', font=("Courier", 25), width=200, command=lambda: Receive(obj5))
     show4 = Button(Frame1, background="#d9d9d9", text="Show Blood Inventory", fg='black', font=("Courier", 25), width=200,command=lambda: Blood(obj5))
 
@@ -38,7 +38,7 @@ def User(r):
 
     Label1 = Label(Frame1)
     Label1.place(relx=0.30, rely=0.55, height=33, width=200)
-    Label1.configure(background="#d9d9d9", text=" UserTable :", font=("Times", 10), width=1000)
+    Label1.configure(background="#d9d9d9", text=" User Table :", font=("Times", 10), width=1000)
 
     print_records="\n\n\n "
     for record in records:
@@ -63,7 +63,7 @@ def Receive(r):
 
     Label1 = Label(Frame1)
     Label1.place(relx=0.30, rely=0.55, height=33, width=200)
-    Label1.configure(background="#d9d9d9", text=" UserTable :", font=("Times", 10), width=1000)
+    Label1.configure(background="#d9d9d9", text=" Receiver Table :", font=("Times", 10), width=1000)
 
     print_records="\n\n\n "
     for record in records:
@@ -89,7 +89,7 @@ def Blood(r):
 
     Label1 = Label(Frame1)
     Label1.place(relx=0.30, rely=0.55, height=33, width=200)
-    Label1.configure(background="#d9d9d9", text=" UserTable :", font=("Times", 10), width=1000)
+    Label1.configure(background="#d9d9d9", text=" Blood_Inventory Table :", font=("Times", 10), width=1000)
 
     print_records = "\n\n\n "
     for record in records:
@@ -114,7 +114,7 @@ def Donor(r):
 
     Label1 = Label(Frame1)
     Label1.place(relx=0.30, rely=0.55, height=33, width=200)
-    Label1.configure(background="#d9d9d9", text=" UserTable :", font=("Times", 10), width=1000)
+    Label1.configure(background="#d9d9d9", text=" Donor Table :", font=("Times", 10), width=1000)
 
     print_records = "\n\n\n "
     for record in records:
