@@ -1,5 +1,5 @@
 from tkinter import *
-from sqlite3 import *
+import sqlite3
 from Fullscrn import *
 
 def Create_User(a):
@@ -67,6 +67,21 @@ def Create_User(a):
     Pass_Label1.configure(background="#d9d9d9", text=" Confirm Password ", font=("Times", 10), width=1000)
     Password_box1 = Entry(toot, show="*")
     Password_box1.place(relx=0.47, rely=0.73, height=33, width=200)
+    Button_create = Button(Frame1, background="#d9d9d9", text="Register", fg='black', font=("Times", 25), width=200,
+                         command=lambda:inert(name2.get(),v.get(),page2.get(),phonenumber2.get(),l_id.get(),Password_box.get(),toot))
+    Button_create.place(relx=0.47, rely=0.80, height=43, width=200)
+    Button_create.configure()
 
     full12=FullScreenApp(toot)
     toot.mainloop()
+
+conn = sqlite3.connect("Blood_Bank.db")
+c = conn.cursor()
+
+
+def inert(l, v, n, pno, a, b,r):
+    r.destroy()
+    c.execute(
+        "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Sex TEXT,Age INTEGER NOT NULL,PhoneNumber INTEGER,Email TEXT PRIMARY KEY,Password TEXT NOT NULL)")
+    c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, v, n, pno, a, b))
+    conn.commit()
