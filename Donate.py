@@ -1,14 +1,14 @@
 from tkinter import *
 from Fullscrn import *
 from tkinter import messagebox
-
+from sqlite3 import *
 import datetime
 now = datetime.datetime.now()
 today=now.strftime("%Y-%m-%d")
 
 import sqlite3
 
-def donate(a,c):
+def donate(a,email):
     root2 = Tk()
     a.destroy()
     root2.geometry("500x500+120+120")
@@ -85,7 +85,7 @@ def donate(a,c):
     # select = OptionMenu(root2, var, *hospital_names)
     # select.place(relx=0.42, rely=0.67, height=33, width=200)
 
-    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20), command=lambda: display(c,b.get(),root2))
+    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20), command=lambda: display(email,b.get(),root2))
     Button_Submit.place(relx=0.35, rely=0.64, height=45, width=300)
 
     full5=FullScreenApp(root2)
@@ -96,7 +96,7 @@ c=conn.cursor()
 
 def add(e,b):
     c.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags+1 where Blood_Group=(?)",(b,))
-    c.execute("INSERT INTO Donor VALUES(?,?)",(e,b))
+    c.execute("INSERT INTO Donor VALUES(?,?,?)",(e,b,today))
     conn.commit()
 
 def display(e,b,d):
