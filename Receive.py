@@ -3,7 +3,6 @@ from tkinter import *
 from Fullscrn import *
 from tkinter import messagebox
 import re
-
 def receive(a,email):
     t = Tk()
 
@@ -98,9 +97,16 @@ conn = sqlite3.connect("Blood_Bank.db")
 co = conn.cursor()
 
 def add(name,age,sex,blood,amount,email):
-    co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-1 where Blood_Group=(?)",(blood,))
-    co.execute("INSERT INTO Receiver VALUES(?,?,?,?,?,?)", (email,name,sex,age,blood,amount ))
-    conn.commit()
+    co.execute("SELECT No_of_Bags from Blood_Inventory WHERE Blood_Group=(?)",(blood,))
+    q=co.fetchone()
+    print(q)
+    if(q[0]==0 or amount-q[0]>0):
+        print("Blood not available")
+    else:
+        print("not empty")
+        co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-1 where Blood_Group=(?)",(blood,))
+        co.execute("INSERT INTO Receiver VALUES(?,?,?,?,?,?)", (email,name,sex,age,blood,amount ))
+        conn.commit()
 
 def display1(name, age,sex,blood,amount,email,t):
     if not (re.search("[A-Za-z_ ]", name)):
