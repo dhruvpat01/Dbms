@@ -2,7 +2,7 @@ import sqlite3
 from tkinter import *
 from Fullscrn import *
 
-def receive(a,c):
+def receive(a,email):
     t = Tk()
 
     pname2 = StringVar()
@@ -40,12 +40,12 @@ def receive(a,c):
     psex = Label(Frame1)
     psex.place(relx=0.25, rely=0.25, height=33, width=200)
     psex.configure(background="#d9d9d9", text="Select Sex of Patient ", font=("Times", 10))
-    v = StringVar(t, value="0")
-    radiobutton1 = Radiobutton(Frame1, text="Male", variable=v, value="Male",font=("Times", 10))
+    sex = StringVar(t, value="0")
+    radiobutton1 = Radiobutton(Frame1, text="Male", variable=sex, value="Male",font=("Times", 10))
     radiobutton1.place(relx=0.45, rely=0.27)
-    radiobutton2 = Radiobutton(Frame1, text="Female", variable=v, value="Female",font=("Times", 10))
+    radiobutton2 = Radiobutton(Frame1, text="Female", variable=sex, value="Female",font=("Times", 10))
     radiobutton2.place(relx=0.55, rely=0.27)
-    radiobutton3 = Radiobutton(Frame1, text="Other", variable=v, value="Other",font=("Times", 10))
+    radiobutton3 = Radiobutton(Frame1, text="Other", variable=sex, value="Other",font=("Times", 10))
     radiobutton3.place(relx=0.65, rely=0.27)
 
     page1 = Label(Frame1)
@@ -55,7 +55,7 @@ def receive(a,c):
     page2.get()
     page2.place(relx=0.42, rely=0.37, height=33, width=200)
 
-    b = StringVar(Frame1)
+    blood = StringVar(Frame1)
     pblood = Label(t, text="Select Blood Group Required")
     pblood.configure(background="#d9d9d9",font=("Times", 10))
     pblood.place(relx=0.26, rely=0.47,height=33,width=200)
@@ -67,8 +67,8 @@ def receive(a,c):
               'AB Negative',
               'O Positive',
               'O Negative']
-    b.set('Select Blood Type')
-    dropdown = OptionMenu(t, b, *values)
+    blood.set('Select Blood Type')
+    dropdown = OptionMenu(t, blood, *values)
     dropdown.place(relx=0.42, rely=0.47,height=33,width=200)
 
 
@@ -87,7 +87,7 @@ def receive(a,c):
     # number2.place(relx=0.42, rely=0.72, height=33, width=200)
 
 
-    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20),command=lambda: display1(pname2.get(),page2.get(),v.get(),b.get(),pamount2.get(),c,t))
+    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20),command=lambda: display1(pname2.get(),page2.get(),sex.get(),blood.get(),pamount2.get(),email,t))
     Button_Submit.place(relx=0.35, rely=0.82, height=45, width=300,)
     full4=FullScreenApp(t)
     t.mainloop()
@@ -95,20 +95,20 @@ def receive(a,c):
 conn = sqlite3.connect("Blood_Bank.db")
 co = conn.cursor()
 
-def add(a,b,d,e,f,c):
-    #co.execute("CREATE TABLE IF NOT EXISTS Blood_Inventory( Blood_Group TEXT, No_of_Bags INTEGER, Cost_per_Bag INTEGER, PRIMARY KEY(Blood_Group))")
-    co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-(?) where Blood_Group=(?)",(f,e))
-    co.execute("INSERT INTO Receiver VALUES(?,?,?,?,?,?)", (a, d, b, e, f, c))
+def add(name,age,sex,blood,amount,email):
+    co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-1 where Blood_Group=(?)",(blood,))
+    co.execute("INSERT INTO Receiver VALUES(?,?,?,?,?,?)", (email,name,sex,age,blood,amount ))
     conn.commit()
 
-def display1(a, b,d,e,f,c,t):
-            add(a,b,d,e,f,c)
+def display1(name, age,sex,blood,amount,email,t):
+            add(name,age,sex,blood,amount,email)
             dumb = Tk()
-            t.destroy()
-            label1 = Label(dumb, text=e)
-            label1.pack()
 
-            label2 = Label(dumb, text="Blood received successfully")
+            # t.destroy()
+            # label1 = Label(dumb, text=e)
+            # label1.pack()
+
+            label2 = Label(dumb, text="Blood Received Successfully")
             label2.pack()
             full9 = FullScreenApp(dumb)
             dumb.mainloop()

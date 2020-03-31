@@ -106,11 +106,11 @@ def display(e,b,d):
         add(e,b)
         dumb = Tk()
 
-        d.destroy()
-        label1 = Label(dumb, text=e)
-        label1.pack()
+        # d.destroy()
+        # label1 = Label(dumb, text=e)
+        # label1.pack()
 
-        label2 = Label(dumb, text=b)
+        label2 = Label(dumb, text="Blood Successfully Donated")
         label2.pack()
         full9 = FullScreenApp(dumb)
         dumb.mainloop()
