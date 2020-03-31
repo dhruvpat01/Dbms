@@ -1,6 +1,8 @@
 import sqlite3
 from tkinter import *
 from Fullscrn import *
+from tkinter import messagebox
+import re
 
 def receive(a,email):
     t = Tk()
@@ -101,14 +103,27 @@ def add(name,age,sex,blood,amount,email):
     conn.commit()
 
 def display1(name, age,sex,blood,amount,email,t):
-            add(name,age,sex,blood,amount,email)
-            dumb = Tk()
+    if not (re.search("[A-Za-z_ ]", name)):
+        r = messagebox.showerror("popup", "Name should only contain character")
 
-            # t.destroy()
-            # label1 = Label(dumb, text=e)
-            # label1.pack()
+    elif not (re.search("\d", age)):
+        q = messagebox.showerror("popup", "only integer is valid")
+    elif not (re.search("[\d]{1,3}", amount)):
+        we = messagebox.showerror("popup", "please enter correct amount")
 
-            label2 = Label(dumb, text="Blood Received Successfully")
-            label2.pack()
-            full9 = FullScreenApp(dumb)
-            dumb.mainloop()
+    elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", email)):
+        d = messagebox.showwarning("popup", "email is invalid")
+
+    else:
+
+        add(name, age, sex, blood, amount, email)
+        dumb = Tk()
+
+        # t.destroy()
+        # label1 = Label(dumb, text=e)
+        # label1.pack()
+
+        label2 = Label(dumb, text="Blood Received Successfully")
+        label2.pack()
+        full9 = FullScreenApp(dumb)
+        dumb.mainloop()

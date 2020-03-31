@@ -1,6 +1,8 @@
 from tkinter import *
 import sqlite3
 from Fullscrn import *
+from tkinter import messagebox
+import re
 
 def Create_User(a):
     toot = Tk()
@@ -80,8 +82,21 @@ c = conn.cursor()
 
 
 def inert(l, v, n, pno, a, b,r):
-    r.destroy()
-    c.execute(
-        "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Sex TEXT,Age INTEGER NOT NULL,PhoneNumber INTEGER,Email TEXT PRIMARY KEY,Password TEXT NOT NULL)")
-    c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, v, n, pno, a, b))
-    conn.commit()
+    if not (re.search("[A-Za-z_ ]", l)):
+        r = messagebox.showerror("popup", "Name should only contain character")
+
+    elif not (re.search("\d", n)):
+        q = messagebox.showerror("popup", "only integer is valid")
+    elif not(re.search("[\d]{10}",pno)):
+        we=messagebox.showerror("popup","It should have 10 digits")
+
+    elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", a)):
+        d = messagebox.showwarning("popup", "email is invalid")
+    elif not (re.search("[\w@$&_!]{8,14}", b)):
+        e = messagebox.showwarning("popup", "password is weak or too short")
+    else:
+        r.destroy()
+        c.execute(
+            "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Sex TEXT,Age INTEGER NOT NULL,PhoneNumber INTEGER,Email TEXT PRIMARY KEY,Password TEXT NOT NULL)")
+        c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, v, n, pno, a, b))
+        conn.commit()
