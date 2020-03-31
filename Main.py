@@ -1,11 +1,12 @@
 from Regsiter import *
 from tkinter import *
 from Fullscrn import *
-root = Tk()
+
 
 
 class blood_bank:
     def __init__(self):
+        root = Tk()
         root.geometry("963x749+540+110")
         root.title("Blood Bank")
         root.configure(background="#d9d9d9")
