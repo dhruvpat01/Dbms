@@ -1,10 +1,12 @@
 from tkinter import messagebox
-
+import Regsiter
 from Receive import *
 from Donate import *
 # from Fullscrn import *
 import re
 import _sqlite3
+from Regsiter import *
+from Main import*
 from Admin import *
 
 def page(a):
@@ -41,6 +43,11 @@ def page(a):
     Button_submit.place(relx=0.42, rely=0.55, height=43, width=200)
     Button_submit.configure()
 
+    Button1 = Button(Frame1, background="#d9d9d9", text="register", fg='black', font=("Times", 25), width=200,
+                           command=lambda: Regsiter.register(boot))
+    Button1.place(relx=0.42, rely=0.65, height=43, width=200)
+    Button1.configure()
+
 
     full7 = FullScreenApp(boot)
     boot.mainloop()
@@ -57,8 +64,6 @@ def loginbut(a, b, d):
 
         elif not (re.search("[\w@$&_!]{8,14}", b)):
             e = messagebox.showwarning("popup", "password is weak or too short")
-
-
 
         else:
             conn = sqlite3.connect("Blood_Bank.db")

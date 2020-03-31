@@ -26,4 +26,3 @@ class blood_bank:
 
 if __name__ == '__main__':
     user = blood_bank()
-

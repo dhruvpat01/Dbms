@@ -26,6 +26,7 @@ def sho(b):
 
 
 conn = sqlite3.connect("Blood_Bank.db")
+
 c = conn.cursor()
 def User(r):
     l=Tk()
@@ -51,4 +52,3 @@ def User(r):
     conn.close()
     full11 = FullScreenApp(l)
     l.mainloop()
-

@@ -96,14 +96,14 @@ conn = sqlite3.connect("Blood_Bank.db")
 co = conn.cursor()
 
 def add(a,b,d,e,f,c):
-    co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-1 where Blood_Group=(?)",(e))
+    #co.execute("CREATE TABLE IF NOT EXISTS Blood_Inventory( Blood_Group TEXT, No_of_Bags INTEGER, Cost_per_Bag INTEGER, PRIMARY KEY(Blood_Group))")
+    co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-(?) where Blood_Group=(?)",(f,e))
     co.execute("INSERT INTO Receiver VALUES(?,?,?,?,?,?)", (a, d, b, e, f, c))
     conn.commit()
 
 def display1(a, b,d,e,f,c,t):
             add(a,b,d,e,f,c)
             dumb = Tk()
-
             t.destroy()
             label1 = Label(dumb, text=e)
             label1.pack()

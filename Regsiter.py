@@ -1,4 +1,4 @@
-# from tkinter import *
+#( from tkinter import *
 # from tkinter import ttk
 from tkinter import messagebox
 import re
@@ -6,7 +6,7 @@ from Login import *
 import sqlite3
 from Fullscrn import *
 
-
+from Login import*
 def register(a):
     loot = Tk()
     name2 = StringVar()
@@ -33,15 +33,15 @@ def register(a):
     name2.place(relx=0.47, rely=0.16, height=33, width=200)
 
     psex = Label(Frame1)
-    psex.place(relx=0.25, rely=0.25, height=33, width=200)
+    psex.place(relx=0.30, rely=0.25, height=33, width=200)
     psex.configure(background="#d9d9d9", text="Select Sex of Patient ", font=("Times", 10))
     v = StringVar(Frame1, value="Male")
     radiobutton1 = Radiobutton(Frame1, text="Male", variable=v, value="Male", font=("Times", 10))
-    radiobutton1.place(relx=0.45, rely=0.25)
+    radiobutton1.place(relx=0.50, rely=0.25)
     radiobutton2 = Radiobutton(Frame1, text="Female", variable=v, value="Female", font=("Times", 10))
-    radiobutton2.place(relx=0.55, rely=0.25)
+    radiobutton2.place(relx=0.60, rely=0.25)
     radiobutton3 = Radiobutton(Frame1, text="Other", variable=v, value="Other", font=("Times", 10))
-    radiobutton3.place(relx=0.65, rely=0.25)
+    radiobutton3.place(relx=0.70, rely=0.25)
 
     page1 = Label(Frame1)
     page1.place(relx=0.30, rely=0.35, height=33, width=200)
@@ -73,6 +73,11 @@ def register(a):
     Password_box1 = Entry(loot, show="*")
     Password_box1.place(relx=0.47, rely=0.73, height=33, width=200)
 
+    Button1 = Button(Frame1, background="#d9d9d9", text="Login", fg='black', font=("Times", 25), width=200,
+                     command=lambda: page(loot))
+    Button1.place(relx=0.65, rely=0.87, height=43, width=200)
+    Button1.configure()
+
     Button_Submit = Button(Frame1, text="Register", padx=30, pady=10, font=("Times", 20),
                            command=lambda: loginbob(name2.get(), v.get(), page2.get(), phonenumber2.get(), l_id.get(),
                                                     Password_box.get(), Password_box1.get(), loot))
@@ -89,7 +94,7 @@ c = conn.cursor()
 def insert(l, v, n, pno, a, b):
     c.execute(
         "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Sex TEXT,Age INTEGER NOT NULL,PhoneNumber INTEGER,Email TEXT PRIMARY KEY,Password TEXT NOT NULL)")
-    c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, v, n, pno, a, b))
+    c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, n, a, b,pno,v))
     conn.commit()
 
 
@@ -126,9 +131,9 @@ def loginbob(l, v, n, pno, a, b, c, d):
         Button3 = Button(Frame1)
         Button3.place(relx=0.45, rely=0.35, height=53, width=200)
         Button3.configure(background="#d9d9d9", text="Donate", font=("Courier", 25), width=200,
-                          command=lambda: donate(root1))
+                          command=lambda: donate(root1,a))
         Button4 = Button(Frame1, background="#d9d9d9", text="Request", fg='black', font=("Courier", 25), width=200,
-                         command=lambda: receive(root1))
+                         command=lambda: receive(root1,a))
         Button4.place(relx=0.45, rely=0.45, height=53, width=200)
         Button4.configure()
         full6 = FullScreenApp(root1)

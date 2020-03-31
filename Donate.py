@@ -2,9 +2,13 @@ from tkinter import *
 from Fullscrn import *
 from tkinter import messagebox
 
+import datetime
+now = datetime.datetime.now()
+today=now.strftime("%Y-%m-%d")
+
 import sqlite3
 
-def donate(a):
+def donate(a,c):
     root2 = Tk()
     a.destroy()
     root2.geometry("500x500+120+120")
@@ -17,9 +21,9 @@ def donate(a):
     Frame1.place(relx=0.02, rely=0.02, relheight=0.94, relwidth=0.96)
     Frame1.configure(borderwidth="2", background="#BD081C", width=500)
 
-    # label2 = Label(Frame1)
-    # label2.place(relx=0.10, rely=0.01, height=73, width=1000)
-    # label2.configure(background="#d9d9d9", text="Enter Donar Details", font=("Times", 25), width=1000)
+    label2 = Label(Frame1)
+    label2.place(relx=0.10, rely=0.01, height=73, width=1000)
+    label2.configure(background="#d9d9d9", text="Enter Donar Details", font=("Times", 25), width=1400)
     # hospital_names = ["Manas Blood Bank", "Manas Blood Bank", "Pallavi Blood Bank", "Prabodhan Blood Bank",
     #                   "Ashirwad Blood Bank", "Blood Bank KEM"]
 
@@ -51,14 +55,16 @@ def donate(a):
 
     Label1 = Label(Frame1)
     Label1.place(relx=0.30, rely=0.55, height=33, width=200)
-    Label1.configure(background="#d9d9d9", text=" Set Login_ID/Email_ID :", font=("Times", 10), width=1000)
-    email_id = Entry(root2)
-    email_id.place(relx=0.47, rely=0.54, height=33, width=200)
+    Label1.configure(background="#d9d9d9", text=" Date:", font=("Times", 10), width=1000)
+
+    Label3 = Label(Frame1)
+    Label3.place(relx=0.47, rely=0.55, height=33, width=200)
+    Label3.configure(background="#d9d9d9", text=now.strftime("%Y-%m-%d"), font=("Times", 10), width=1000)
 
     b = StringVar(Frame1)
     pblood = Label(root2, text="Select Your Blood Group ")
     pblood.configure(background="#d9d9d9", font=("Times", 10))
-    pblood.place(relx=0.26, rely=0.37, height=33, width=200)
+    pblood.place(relx=0.30, rely=0.37, height=33, width=200)
     values = ["A Positive",
               'A Negative',
               'B Positive',
@@ -69,7 +75,7 @@ def donate(a):
               'O Negative']
     b.set('Select Your Blood Type')
     dropdown = OptionMenu(root2, b, *values)
-    dropdown.place(relx=0.52, rely=0.37, height=33, width=200)
+    dropdown.place(relx=0.47, rely=0.37, height=33, width=200)
 
     # var = StringVar(Frame1)
     # slect_names = Label(root2, text="Select Blood Bank")
@@ -79,7 +85,7 @@ def donate(a):
     # select = OptionMenu(root2, var, *hospital_names)
     # select.place(relx=0.42, rely=0.67, height=33, width=200)
 
-    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20), command=lambda: display(email_id.get(),b.get(),root2))
+    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20), command=lambda: display(c,b.get(),root2))
     Button_Submit.place(relx=0.35, rely=0.64, height=45, width=300)
 
     full5=FullScreenApp(root2)
@@ -89,7 +95,7 @@ conn=sqlite3.connect("Blood_Bank.db")
 c=conn.cursor()
 
 def add(e,b):
-    c.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags+1 where Blood_Group=(?)",(b))
+    c.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags+1 where Blood_Group=(?)",(b,))
     c.execute("INSERT INTO Donor VALUES(?,?)",(e,b))
     conn.commit()
 
@@ -97,7 +103,7 @@ def display(e,b,d):
     if not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", e)):
      d= messagebox.showwarning("popup", "email is invalid")
     else:
-        add(e, b)
+        add(e,b)
         dumb = Tk()
 
         d.destroy()
