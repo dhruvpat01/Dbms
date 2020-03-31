@@ -11,7 +11,7 @@ def sho(b):
     Frame1.configure(borderwidth="2", background="#BD081C", width=500)
 
     show1 = Button(Frame1, background="#d9d9d9", text="Show User Table", fg='black', font=("Courier", 25), width=200,command=lambda :User(obj5))
-    show2 = Button(Frame1, background="#d9d9d9", text="Show Donor Table", fg='black', font=("Courier", 25), width=300)
+    show2 = Button(Frame1, background="#d9d9d9", text="Show Donor Table", fg='black', font=("Courier", 25), width=300,command=lambda :User(obj5))
     show3 = Button(Frame1, background="#d9d9d9", text="Show Receiver Table", fg='black', font=("Courier", 25), width=200, command=lambda: Receive(obj5))
     show4 = Button(Frame1, background="#d9d9d9", text="Show Blood Inventory", fg='black', font=("Courier", 25), width=200,command=lambda: Blood(obj5))
 
