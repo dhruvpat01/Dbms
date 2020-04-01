@@ -3,9 +3,12 @@ from tkinter import *
 from Fullscrn import *
 from Regsiter import *
 from Create_User import *
-from Create_blood import *
 from Show_Tables import *
 from Delete_Record import *
+from Update_User import *
+from Update_Receiver import *
+from Update_Donor import *
+from Update_Blood import *
 
 def admin(b):
     obj = Tk()
@@ -15,7 +18,7 @@ def admin(b):
     Frame1.place(relx=0.02, rely=0.02, relheight=0.94, relwidth=0.96)
     Frame1.configure(borderwidth="2", background="#BD081C", width=500)
 
-    create = Button(Frame1, background="#d9d9d9", text="Create", fg='black', font=("Courier", 25), width=200, command=lambda:crate(obj))
+    create = Button(Frame1, background="#d9d9d9", text="Create", fg='black', font=("Courier", 25), width=200, command=lambda:Create_User(obj))
     show = Button(Frame1, background="#d9d9d9", text="Show Records", fg='black', font=("Courier", 25), width=300, command=lambda:sho(obj))
     update = Button(Frame1, background="#d9d9d9", text="Update", fg='black', font=("Courier", 25), width=200, command=lambda:updte(obj))
     delete = Button(Frame1, background="#d9d9d9", text="Delete", fg='black', font=("Courier", 25), width=200, command=lambda:delet(obj))
@@ -29,23 +32,6 @@ def admin(b):
     obj.mainloop()
 
 
-def crate(a):
-    obj2 = Tk()
-    obj2.title("Create Page")
-    Frame1 = Frame(obj2)
-    Frame1.place(relx=0.02, rely=0.02, relheight=0.94, relwidth=0.96)
-    Frame1.configure(borderwidth="2", background="#BD081C", width=500)
-
-    create1 = Button(Frame1, background="#d9d9d9", text="Create New User", fg='black', font=("Courier", 25), width=200, command=lambda: Create_User(obj2))
-    create2 = Button(Frame1, background="#d9d9d9", text="Create Blood Record", fg='black', font=("Courier", 25),width=200, command=lambda: create_blood(obj2))
-
-
-    create1.place(relx=0.35, rely=0.35, height=53, width=400)
-    create2.place(relx=0.35, rely=0.45, height=53, width=400)
-
-    full10 = FullScreenApp(obj2)
-    obj2.mainloop()
-
 
 def updte(c):
     obj3 = Tk()
@@ -54,10 +40,10 @@ def updte(c):
     Frame1.place(relx=0.02, rely=0.02, relheight=0.94, relwidth=0.96)
     Frame1.configure(borderwidth="2", background="#BD081C", width=500)
 
-    update1 = Button(Frame1, background="#d9d9d9", text="Update User", fg='black', font=("Courier", 25), width=200)
-    update2 = Button(Frame1, background="#d9d9d9", text="Update Donor", fg='black', font=("Courier", 25), width=300)
-    update3 = Button(Frame1, background="#d9d9d9", text="Update Receiver", fg='black', font=("Courier", 25), width=200)
-    update4 = Button(Frame1, background="#d9d9d9", text="Update Blood Inventory", fg='black', font=("Courier", 25), width=200)
+    update1 = Button(Frame1, background="#d9d9d9", text="Update User", fg='black', font=("Courier", 25), width=200, command=lambda : user11(obj3))
+    update2 = Button(Frame1, background="#d9d9d9", text="Update Donor", fg='black', font=("Courier", 25), width=300, command=lambda : donor11(obj3))
+    update3 = Button(Frame1, background="#d9d9d9", text="Update Receiver", fg='black', font=("Courier", 25), width=200, command=lambda : receiver11(obj3))
+    update4 = Button(Frame1, background="#d9d9d9", text="Update Blood Inventory", fg='black', font=("Courier", 25), width=200, command=lambda : blood11(obj3))
 
     update1.place(relx=0.35, rely=0.25, height=53, width=400)
     update2.place(relx=0.35, rely=0.35, height=53, width=400)
@@ -66,5 +52,4 @@ def updte(c):
 
     full11 = FullScreenApp(obj3)
     obj3.mainloop()
-
 
