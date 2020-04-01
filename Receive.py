@@ -113,7 +113,7 @@ def add(name,age,sex,blood,amount,email,t):
         o.mainloop()
     else:
         co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-1 where Blood_Group=(?)", (blood,))
-        co.execute("INSERT INTO Receiver VALUES(?,?,?,?,?,?)", (name, sex,age,blood,amount, email,s))
+        co.execute("INSERT INTO Receiver(Email,PName,PSex,PAge,Blood_Group,Bags_Required) VALUES(?,?,?,?,?,?)", (name, sex,age,blood,amount, email,s))
         conn.commit()
         if not (re.search("[A-Za-z_ ]", name)):
             window = Tk()
@@ -153,5 +153,3 @@ def add(name,age,sex,blood,amount,email,t):
             Label1.configure(background="#d9d9d9", text=" Blood Received Successfully", font=("Times", 50), width=1000)
             full11 = FullScreenApp(o)
             o.mainloop()
-
-

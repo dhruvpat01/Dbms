@@ -97,7 +97,7 @@ c=conn.cursor()
 
 def add(e,b):
     c.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags+1 where Blood_Group=(?)",(b,))
-    c.execute("INSERT INTO Donor VALUES(?,?,?)",(e,b,today))
+    c.execute("INSERT INTO Donor (Email,Blood_Group,Date) VALUES(?,?,?)",(e,b,today))
     conn.commit()
 
 def display(e,b,d):
