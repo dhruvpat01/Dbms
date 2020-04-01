@@ -85,7 +85,7 @@ def gyemail(a):
 
     email1 = Label(Frame1)
     email1.place(relx=0.30, rely=0.45, height=33, width=200)
-    email1.configure(background="#d9d9d9", text="Enter Email:", font=("Times", 10), width=1000)
+    email1.configure(background="#d9d9d9", text="Enter Sr_No", font=("Times", 10), width=1000)
     email2 = Entry(d)
     email2.place(relx=0.47, rely=0.45, height=33, width=200)
 
@@ -100,7 +100,7 @@ def gyemail(a):
 def gserDel(email,d):
     conn = sqlite3.connect("Blood_Bank.db")
     c = conn.cursor()
-    c.execute("Select * FROM Receiver WHERE Email=(?)",(email,))
+    c.execute("Select * FROM Receiver WHERE Sr_No=(?)",(email,))
     rec=c.fetchone()
     if rec is None:
         window = Tk()
@@ -109,7 +109,7 @@ def gserDel(email,d):
         window.destroy()
 
     else:
-        c.execute("DELETE FROM Receiver WHERE Email=(?)", (email,))
+        c.execute("DELETE FROM Receiver WHERE Sr_No=(?)", (email,))
         window = Tk()
         window.withdraw()
         messagebox.showwarning("popup", "Deleted")
@@ -129,7 +129,7 @@ def kyemail(a):
 
     email1 = Label(Frame1)
     email1.place(relx=0.30, rely=0.45, height=33, width=200)
-    email1.configure(background="#d9d9d9", text="Enter Email:", font=("Times", 10), width=1000)
+    email1.configure(background="#d9d9d9", text="Enter Sr_No:", font=("Times", 10), width=1000)
     email2 = Entry(d)
     email2.place(relx=0.47, rely=0.45, height=33, width=200)
 
@@ -144,7 +144,7 @@ def kyemail(a):
 def kserDel(email,d):
     conn = sqlite3.connect("Blood_Bank.db")
     c = conn.cursor()
-    c.execute("Select * FROM Donor WHERE Email=(?)",(email,))
+    c.execute("Select * FROM Donor WHERE Sr_No=(?)",(email,))
     rec=c.fetchone()
     if rec is None:
         window = Tk()
@@ -152,7 +152,7 @@ def kserDel(email,d):
         messagebox.showwarning("popup", "No such record exists")
         window.destroy()
     else:
-        c.execute("DELETE FROM Donor WHERE Email=(?)", (email,))
+        c.execute("DELETE FROM Donor WHERE Sr_No=(?)", (email,))
         window = Tk()
         window.withdraw()
         messagebox.showwarning("popup", "Deleted")
