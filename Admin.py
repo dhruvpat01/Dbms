@@ -5,6 +5,7 @@ from Regsiter import *
 from Create_User import *
 from Create_blood import *
 from Show_Tables import *
+from Delete_Record import *
 
 def admin(b):
     obj = Tk()
@@ -67,22 +68,3 @@ def updte(c):
     obj3.mainloop()
 
 
-def delet(d):
-    obj4 = Tk()
-    obj4.title("Delete page")
-    Frame1 = Frame(obj4)
-    Frame1.place(relx=0.02, rely=0.02, relheight=0.94, relwidth=0.96)
-    Frame1.configure(borderwidth="2", background="#BD081C", width=500)
-
-    delete1 = Button(Frame1, background="#d9d9d9", text="Delete User Records", fg='black', font=("Courier", 25), width=200)
-    delete2 = Button(Frame1, background="#d9d9d9", text="Delete Donor Records", fg='black', font=("Courier", 25), width=300)
-    delete3 = Button(Frame1, background="#d9d9d9", text="Delete Receiver Records", fg='black', font=("Courier", 25), width=200)
-    delete4 = Button(Frame1, background="#d9d9d9", text="Delete Blood Inventory", fg='black', font=("Courier", 25), width=200)
-
-    delete1.place(relx=0.35, rely=0.25, height=53, width=400)
-    delete2.place(relx=0.35, rely=0.35, height=53, width=400)
-    delete3.place(relx=0.35, rely=0.45, height=53, width=400)
-    delete4.place(relx=0.35, rely=0.55, height=53, width=400)
-
-    full11 = FullScreenApp(obj4)
-    obj4.mainloop()

@@ -1,14 +1,14 @@
 from tkinter import *
 from Fullscrn import *
 from tkinter import messagebox
-from sqlite3 import *
+
 import datetime
 now = datetime.datetime.now()
 today=now.strftime("%Y-%m-%d")
 
 import sqlite3
 
-def donate(a,email):
+def donate(a,c):
     root2 = Tk()
     a.destroy()
     root2.geometry("500x500+120+120")
@@ -61,7 +61,8 @@ def donate(a,email):
     Label3.place(relx=0.47, rely=0.55, height=33, width=200)
     Label3.configure(background="#d9d9d9", text=now.strftime("%Y-%m-%d"), font=("Times", 10), width=1000)
 
-    b = StringVar(Frame1)
+    b = StringVar(Frame1,value="Empty")
+
     pblood = Label(root2, text="Select Your Blood Group ")
     pblood.configure(background="#d9d9d9", font=("Times", 10))
     pblood.place(relx=0.30, rely=0.37, height=33, width=200)
@@ -85,7 +86,7 @@ def donate(a,email):
     # select = OptionMenu(root2, var, *hospital_names)
     # select.place(relx=0.42, rely=0.67, height=33, width=200)
 
-    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20), command=lambda: display(email,b.get(),root2))
+    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20), command=lambda: display(c,b.get(),root2))
     Button_Submit.place(relx=0.35, rely=0.64, height=45, width=300)
 
     full5=FullScreenApp(root2)
@@ -101,16 +102,26 @@ def add(e,b):
 
 def display(e,b,d):
     if not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", e)):
-     d= messagebox.showwarning("popup", "email is invalid")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "email is invalid")
+        window.destroy()
+
+    elif b == 'Select Your Blood Type':
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "entry empty!")
+        window.destroy()
+
     else:
         add(e,b)
         dumb = Tk()
 
-        # d.destroy()
-        # label1 = Label(dumb, text=e)
-        # label1.pack()
+        d.destroy()
+        label1 = Label(dumb, text=e)
+        label1.pack()
 
-        label2 = Label(dumb, text="Blood Successfully Donated")
+        label2 = Label(dumb, text=b)
         label2.pack()
         full9 = FullScreenApp(dumb)
         dumb.mainloop()

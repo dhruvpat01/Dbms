@@ -55,15 +55,23 @@ def page(a):
 
 def loginbut(a, b, d):
 
-    if(a=="admin" and b=="werock"):
+    if(a=="a" and b=="a"):
         admin(d)
     else:
 
         if not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", a)):
-            d = messagebox.showwarning("popup", "email is invalid")
+            window = Tk()
+            window.withdraw()
+            messagebox.showwarning("popup", "email is invalid")
+            window.destroy()
+
 
         elif not (re.search("[\w@$&_!]{8,14}", b)):
-            e = messagebox.showwarning("popup", "password is weak or too short")
+            window = Tk()
+            window.withdraw()
+            messagebox.showwarning("popup", "password is weak or too short")
+            window.destroy
+
 
         else:
             conn = sqlite3.connect("Blood_Bank.db")
@@ -95,6 +103,10 @@ def loginbut(a, b, d):
                 root1.mainloop()
 
             else:
-                f = messagebox.showerror("Error", "Account doesnt exist")
+                window = Tk()
+                window.withdraw()
+                messagebox.showerror("Error", "Account doesnt exist")
+                window.destroy
+
 
 

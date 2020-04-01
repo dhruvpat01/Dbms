@@ -100,20 +100,44 @@ def insert(l, v, n, pno, a, b):
 
 def loginbob(l, v, n, pno, a, b, c, d):
     if not (re.search("[A-Za-z_ ]", l)):
-        r = messagebox.showerror("popup", "Name should only contain character")
+        window=Tk()
+        window.withdraw()
+        messagebox.showerror("popup", "Name should only contain character")
+        window.destroy()
+
+
 
     elif not (re.search("\d", n)):
-        q = messagebox.showerror("popup", "only integer is valid")
+        window = Tk()
+        window.withdraw()
+        messagebox.showerror("popup", "Age should contain only integer values")
+        window.destroy()
+
+
 
     elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", a)):
-        d = messagebox.showwarning("popup", "email is invalid")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "email is invalid")
+        window.destroy()
+
+
 
     elif not (re.search("[\w@$&_!]{8,14}", b)):
-        e = messagebox.showwarning("popup", "password is weak or too short")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "password is weak or too short")
+        window.destroy()
 
 
-    elif not (c == b):
-        a = messagebox.showwarning("popup", "your passwords do not match")
+
+
+    elif not (c==b):
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "your passwords do not match")
+        window.destroy()
+     
     else:
         insert(l, v, n, pno, a, b)
         root1 = Tk()

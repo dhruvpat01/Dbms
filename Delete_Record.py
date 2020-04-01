@@ -56,10 +56,20 @@ def UserDel(email,d):
     c.execute("Select * FROM User WHERE Email=(?)",(email,))
     rec=c.fetchone()
     if rec is None:
-        y=messagebox.showwarning("popup","No such record exists")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "No such record exists")
+        window.destroy()
+
+
     else:
         c.execute("DELETE FROM User WHERE Email=(?)", (email,))
-        l = messagebox.showwarning("popup", "Deleted")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "Deleted")
+        window.destroy()
+
+
         d.destroy()
         conn.commit()
 
@@ -93,10 +103,17 @@ def gserDel(email,d):
     c.execute("Select * FROM Receiver WHERE Email=(?)",(email,))
     rec=c.fetchone()
     if rec is None:
-        y=messagebox.showwarning("popup","No such record exists")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "No such record exists")
+        window.destroy()
+
     else:
         c.execute("DELETE FROM Receiver WHERE Email=(?)", (email,))
-        l = messagebox.showwarning("popup", "Deleted")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "Deleted")
+        window.destroy()
         d.destroy()
         conn.commit()
 
@@ -130,10 +147,16 @@ def kserDel(email,d):
     c.execute("Select * FROM Donor WHERE Email=(?)",(email,))
     rec=c.fetchone()
     if rec is None:
-        y=messagebox.showwarning("popup","No such record exists")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "No such record exists")
+        window.destroy()
     else:
         c.execute("DELETE FROM Donor WHERE Email=(?)", (email,))
-        l = messagebox.showwarning("popup", "Deleted")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "Deleted")
+        window.destroy()
         d.destroy()
         conn.commit()
 
@@ -178,9 +201,15 @@ def Bloodel(blood,e):
     c.execute("Select * FROM Blood_Inventory WHERE Blood_Group=(?)",(blood,))
     rec=c.fetchone()
     if rec is None:
-        y=messagebox.showwarning("popup","No such record exists")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "No such record exists")
+        window.destroy()
     else:
         c.execute("DELETE FROM Blood_Inventory WHERE Blood_Group=(?)", (blood,))
-        l = messagebox.showwarning("popup", "Deleted")
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "Deleted")
+        window.destroy()
         e.destroy()
         conn.commit()

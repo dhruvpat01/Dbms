@@ -88,48 +88,70 @@ def receive(a,email):
     # number2.place(relx=0.42, rely=0.72, height=33, width=200)
 
 
-    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20),command=lambda: display1(pname2.get(),page2.get(),sex.get(),blood.get(),pamount2.get(),email,t))
+    Button_Submit = Button(Frame1, text="Submit", padx=30, pady=10, font=("Times", 20),command=lambda: add(pname2.get(),page2.get(),sex.get(),blood.get(),pamount2.get(),email,t))
     Button_Submit.place(relx=0.35, rely=0.82, height=45, width=300,)
     full4=FullScreenApp(t)
     t.mainloop()
 
-conn = sqlite3.connect("Blood_Bank.db")
-co = conn.cursor()
 
-def add(name,age,sex,blood,amount,email):
+def add(name,age,sex,blood,amount,email,t):
+    conn = sqlite3.connect("Blood_Bank.db")
+    co = conn.cursor()
+
     co.execute("SELECT No_of_Bags from Blood_Inventory WHERE Blood_Group=(?)",(blood,))
     q=co.fetchone()
-    print(q)
-    if(q[0]==0 or amount-q[0]>0):
-        print("Blood not available")
+    if(q[0]==0 or int(amount)-q[0]>0):
+        o = Tk()
+        Frame1 = Frame(o)
+        Frame1.place(relx=0.02, rely=0.02, relheight=0.94, relwidth=0.96)
+        Frame1.configure(borderwidth="2", width=500)
+
+        Label1 = Label(Frame1)
+        Label1.place(relx=0.20, rely=0.25, height=500, width=1000)
+        Label1.configure(background="#d9d9d9", text=" Sorry Blood not available", font=("Times", 50), width=1000)
+        full11 = FullScreenApp(o)
+        o.mainloop()
     else:
-        print("not empty")
-        co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-1 where Blood_Group=(?)",(blood,))
-        co.execute("INSERT INTO Receiver VALUES(?,?,?,?,?,?)", (email,name,sex,age,blood,amount ))
+        co.execute("UPDATE Blood_Inventory SET No_of_Bags=No_of_Bags-1 where Blood_Group=(?)", (blood,))
+        co.execute("INSERT INTO Receiver VALUES(?,?,?,?,?,?)", (name, sex,age,blood,amount, email,s))
         conn.commit()
+        if not (re.search("[A-Za-z_ ]", name)):
+            window = Tk()
+            window.withdraw()
+            messagebox.showerror("popup", "Name should only contain character")
+            window.destroy()
 
-def display1(name, age,sex,blood,amount,email,t):
-    if not (re.search("[A-Za-z_ ]", name)):
-        r = messagebox.showerror("popup", "Name should only contain character")
 
-    elif not (re.search("\d", age)):
-        q = messagebox.showerror("popup", "only integer is valid")
-    elif not (re.search("[\d]{1,3}", amount)):
-        we = messagebox.showerror("popup", "please enter correct amount")
+        elif not (re.search("\d", age)):
 
-    elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", email)):
-        d = messagebox.showwarning("popup", "email is invalid")
+            window = Tk()
+            window.withdraw()
+            messagebox.showerror("popup", "only integer is valid")
+            window.destroy()
+        elif not (re.search("[\d]{1,3}", amount)):
+            window = Tk()
+            window.withdraw()
+            messagebox.showerror("popup", "please enter correct amount")
+            window.destroy()
 
-    else:
 
-        add(name, age, sex, blood, amount, email)
-        dumb = Tk()
+        elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", email)):
+            window = Tk()
+            window.withdraw()
+            messagebox.showwarning("popup", "email is invalid")
+            window.destroy()
 
-        # t.destroy()
-        # label1 = Label(dumb, text=e)
-        # label1.pack()
 
-        label2 = Label(dumb, text="Blood Received Successfully")
-        label2.pack()
-        full9 = FullScreenApp(dumb)
-        dumb.mainloop()
+        else:
+            o = Tk()
+            Frame1 = Frame(o)
+            Frame1.place(relx=0.02, rely=0.02, relheight=0.94, relwidth=0.96)
+            Frame1.configure(borderwidth="2", width=500)
+
+            Label1 = Label(Frame1)
+            Label1.place(relx=0.20, rely=0.25, height=500, width=1000)
+            Label1.configure(background="#d9d9d9", text=" Blood Received Successfully", font=("Times", 50), width=1000)
+            full11 = FullScreenApp(o)
+            o.mainloop()
+
+
