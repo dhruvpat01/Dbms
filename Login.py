@@ -90,14 +90,17 @@ def loginbut(a, b, d):
                 label2.place(relx=0.10, rely=0.15, height=93, width=1000)
                 label2.configure(background="#d9d9d9", text="Do You Want To Donate Or Request?", font=("Times", 25),
                                  width=1200)
-                Button3 = Button(Frame1)
-                Button3.place(relx=0.45, rely=0.35, height=53, width=200)
+                Frame2=Frame(Frame1)
+                Frame2.place(relx=0.4, rely=0.3, relheight=0.50, relwidth=0.30)
+
+                Button3 = Button(Frame2)
+                Button3.place(relx=0.40, rely=0.35, height=53, width=200)
                 Button3.configure(background="#d9d9d9", text="Donate", font=("Courier", 25), width=200,
                                   command=lambda: donate(root1,a))
-                Button4 = Button(Frame1, background="#d9d9d9", text="Request", fg='black', font=("Courier", 25),
+                Button4 = Button(Frame2, background="#d9d9d9", text="Request", fg='black', font=("Courier", 25),
                                  width=200,
                                  command=lambda: receive(root1,a))
-                Button4.place(relx=0.45, rely=0.45, height=53, width=200)
+                Button4.place(relx=0.40, rely=0.55, height=53, width=200)
                 Button4.configure()
                 full7 = FullScreenApp(root1)
                 root1.mainloop()
@@ -107,6 +110,3 @@ def loginbut(a, b, d):
                 window.withdraw()
                 messagebox.showerror("Error", "Account doesnt exist")
                 window.destroy
-
-
-
