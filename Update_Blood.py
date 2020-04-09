@@ -43,6 +43,7 @@ co = conn.cursor()
 
 
 def blood22(a, blood):
+
     co.execute("SELECT No_of_Bags,Cost_per_Bag FROM Blood_Inventory WHERE Blood_Group=(?)", (blood,))
     details = co.fetchall()
 

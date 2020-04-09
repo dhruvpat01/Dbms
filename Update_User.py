@@ -29,15 +29,30 @@ def user11(a):
     full11 = FullScreenApp(b)
     b.mainloop()
 
+
 conn = sqlite3.connect("Blood_Bank.db")
 co = conn.cursor()
 
+
 def user22(a, email):
-    if not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", email)):
+    co.execute('Select Email from User where Email=(?)', (email,))
+    already = co.fetchone()
+
+    if not (already):
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "Account Non-Existent")
+        window.destroy()
+
+    elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", email)):
         window = Tk()
         window.withdraw()
         messagebox.showwarning("popup", "email is invalid")
         window.destroy()
+
+
+
+
     else:
         co.execute("SELECT Name,Sex,Age,PhoneNumber,Password FROM User WHERE Email=(?)", (email,))
         details = co.fetchone()
@@ -97,13 +112,13 @@ def user22(a, email):
         c.mainloop()
 
 
-
-def update1(name, sex, age, pno, password,email):
+def update1(name, sex, age, pno, password, email):
     co.execute("UPDATE User SET Name=(?),sex=(?),Age=(?),PhoneNumber=(?),Password=(?) WHERE Email=(?)",
                (str(name), str(sex), int(age), int(pno), str(password), str(email),))
     conn.commit()
 
-def display1(name,sex,age,pno,password,email,a):
+
+def display1(name, sex, age, pno, password, email, a):
     if not (re.search("[A-Za-z_ ]", name)):
         window = Tk()
         window.withdraw()

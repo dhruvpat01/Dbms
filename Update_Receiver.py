@@ -33,7 +33,16 @@ conn = sqlite3.connect("Blood_Bank.db")
 co = conn.cursor()
 
 def receiver22(a, email):
-    if not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", email)):
+    co.execute('Select Email from Receiver where Email=(?)', (email,))
+    already = co.fetchone()
+
+    if not (already):
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "Account Non-Existent")
+        window.destroy()
+
+    elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", email)):
         window = Tk()
         window.withdraw()
         messagebox.showwarning("popup", "email is invalid")

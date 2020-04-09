@@ -112,7 +112,7 @@ def inert(l, v, n, pno, a, b,c,d):
         window.destroy()
 
 
-    elif not (already==0):
+    elif not (not already):
         window = Tk()
         window.withdraw()
         messagebox.showwarning("popup", "Email already Present")
@@ -138,5 +138,5 @@ def inert(l, v, n, pno, a, b,c,d):
         d.destroy()
         co.execute(
             "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Sex TEXT,Age INTEGER NOT NULL,PhoneNumber INTEGER,Email TEXT PRIMARY KEY,Password TEXT NOT NULL)")
-        co.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, n, a, b, pno, v))
+        co.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, v, n, pno, a, b))
         conn.commit()
