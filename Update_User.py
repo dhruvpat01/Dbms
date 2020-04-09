@@ -81,20 +81,20 @@ def user22(a, email):
     password2.place(relx=0.47, rely=0.55, height=33, width=200)
 
     update11 = Button(Frame1, background="#d9d9d9", text="Update", fg='black', font=("Times", 25), width=200,
-                     command=lambda: display1(name2.get, v.get(), age2.get, pno2.get(), email, password2.get(),c))
+                     command=lambda: display1(name2.get(), v.get(), age2.get(), pno2.get(), password2.get(),email,c))
     update11.place(relx=0.47, rely=0.67, height=43, width=200)
 
     full11 = FullScreenApp(c)
     c.mainloop()
 
 
-def update1(name, sex, age, pno, email, password):
-    co.execute("UPDATE User SET Name=(?),Sex=(?),Age=(?),PhoneNumber=(?),Password=(?) WHERE Email=(?)",
-               (name, sex, age, pno, password, email))
+def update1(name, sex, age, pno, password,email):
+    co.execute("UPDATE User SET Name=(?),sex=(?),Age=(?),PhoneNumber=(?),Password=(?) WHERE Email=(?)",
+               (str(name), str(sex), int(age), int(pno), str(password), str(email),))
     conn.commit()
 
-def display1(name,sex,age,pno,email,password,a):
-    update1(name,sex,age,pno,email,password)
+def display1(name,sex,age,pno,password,email,a):
+    update1(name,sex,age,pno,password,email)
     a.destroy()
     d=Tk()
 
