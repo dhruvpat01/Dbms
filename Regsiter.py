@@ -101,6 +101,9 @@ def insert(l, v, n, pno, a, b):
 
 
 def loginbob(l, v, n, pno, a, b, c, d):
+    co.execute('Select Email from User where Email=(?)', (a,))
+    already = co.fetchone()
+
     if not (re.search("[A-Za-z_ ]", l)):
         window = Tk()
         window.withdraw()
@@ -127,6 +130,15 @@ def loginbob(l, v, n, pno, a, b, c, d):
         window.withdraw()
         messagebox.showwarning("popup", "email is invalid")
         window.destroy()
+
+
+
+    elif not (already==0):
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "Email already Present")
+        window.destroy()
+
 
 
 
@@ -169,23 +181,3 @@ def loginbob(l, v, n, pno, a, b, c, d):
         Button4.configure()
         full6 = FullScreenApp(root1)
         root1.mainloop()
-        # #insert(l, n, a, b)
-        # root1 = Tk()
-        # d.destroy()
-        # root1.title("Blood Bank")
-        # # root1.geometry("500x500+120+120")
-        # root1.configure(background="grey")
-        # Frame1 = Frame(root1)
-        # Frame1.place(relx=0.02, rely=0.02, relheight=0.94, relwidth=0.96)
-        # Frame1.configure(borderwidth="2", background="grey", width=500)
-        #
-        # Button3 = Button(Frame1)
-        # Button3.place(relx=0.35, rely=0.69, height=53, width=100)
-        # Button3.configure(background="#d9d9d9", text="Donate", font=("Courier", 15), width=100,
-        #                   command=lambda: donate(root1))
-        # Button4 = Button(Frame1, background="#d9d9d9", text="Request", fg='black', font=("Courier", 15), width=100,
-        #                  command=lambda: receive(root1))
-        # Button4.place(relx=0.35, rely=0.49, height=53, width=100)
-        # Button4.configure()
-        # full6=FullScreenApp(root1)
-        # root1.mainloop()
