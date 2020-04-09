@@ -1,4 +1,4 @@
-#( from tkinter import *
+# ( from tkinter import *
 # from tkinter import ttk
 from tkinter import messagebox
 import re
@@ -6,7 +6,9 @@ from Login import *
 import sqlite3
 from Fullscrn import *
 
-from Login import*
+from Login import *
+
+
 def register(a):
     loot = Tk()
     name2 = StringVar()
@@ -94,13 +96,13 @@ c = conn.cursor()
 def insert(l, v, n, pno, a, b):
     c.execute(
         "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Sex TEXT,Age INTEGER NOT NULL,PhoneNumber INTEGER,Email TEXT PRIMARY KEY,Password TEXT NOT NULL)")
-    c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, n, a, b,pno,v))
+    c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, n, a, b, pno, v))
     conn.commit()
 
 
 def loginbob(l, v, n, pno, a, b, c, d):
     if not (re.search("[A-Za-z_ ]", l)):
-        window=Tk()
+        window = Tk()
         window.withdraw()
         messagebox.showerror("popup", "Name should only contain character")
         window.destroy()
@@ -113,6 +115,11 @@ def loginbob(l, v, n, pno, a, b, c, d):
         messagebox.showerror("popup", "Age should contain only integer values")
         window.destroy()
 
+    elif not (re.search(r'[789]\d{9}$', pno)):
+        window = Tk()
+        window.withdraw()
+        messagebox.showerror("popup", "PhoneNumber should be of 10 digits and it should start with only 7,8 and 9")
+        window.destroy()
 
 
     elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", a)):
@@ -132,12 +139,12 @@ def loginbob(l, v, n, pno, a, b, c, d):
 
 
 
-    elif not (c==b):
+    elif not (c == b):
         window = Tk()
         window.withdraw()
         messagebox.showwarning("popup", "your passwords do not match")
         window.destroy()
-     
+
     else:
         insert(l, v, n, pno, a, b)
         root1 = Tk()
@@ -155,9 +162,9 @@ def loginbob(l, v, n, pno, a, b, c, d):
         Button3 = Button(Frame1)
         Button3.place(relx=0.45, rely=0.35, height=53, width=200)
         Button3.configure(background="#d9d9d9", text="Donate", font=("Courier", 25), width=200,
-                          command=lambda: donate(root1,a))
+                          command=lambda: donate(root1, a))
         Button4 = Button(Frame1, background="#d9d9d9", text="Request", fg='black', font=("Courier", 25), width=200,
-                         command=lambda: receive(root1,a))
+                         command=lambda: receive(root1, a))
         Button4.place(relx=0.45, rely=0.45, height=53, width=200)
         Button4.configure()
         full6 = FullScreenApp(root1)
