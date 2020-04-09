@@ -1,6 +1,8 @@
 from tkinter import *
 import sqlite3
 from Fullscrn import *
+from tkinter import messagebox
+import re
 
 def Create_User(a):
     toot = Tk()
@@ -80,8 +82,53 @@ c = conn.cursor()
 
 
 def inert(l, v, n, pno, a, b,r):
-    r.destroy()
-    c.execute(
-        "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Sex TEXT,Age INTEGER NOT NULL,PhoneNumber INTEGER,Email TEXT PRIMARY KEY,Password TEXT NOT NULL)")
-    c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, v, n, pno, a, b))
-    conn.commit()
+    if not (re.search("[A-Za-z_ ]", l)):
+        window = Tk()
+        window.withdraw()
+        messagebox.showerror("popup", "Name should only contain character")
+        window.destroy()
+
+
+
+    elif not (re.search("\d", n)):
+        window = Tk()
+        window.withdraw()
+        messagebox.showerror("popup", "Age should contain only integer values")
+        window.destroy()
+
+    elif not (re.search(r'[789]\d{9}$', pno)):
+        window = Tk()
+        window.withdraw()
+        messagebox.showerror("popup", "PhoneNumber should be of 10 digits and it should start with only 7,8 and 9")
+        window.destroy()
+
+
+    elif not (re.search("[\w._%+-]{1,20}@[\w.-]{2,20}.[A-Za-z]{2,3}", a)):
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "email is invalid")
+        window.destroy()
+
+
+
+    elif not (re.search("[\w@$&_!]{8,14}", b)):
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "password is weak or too short")
+        window.destroy()
+
+
+
+
+    elif not (c == b):
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "your passwords do not match")
+        window.destroy()
+
+    else:
+        r.destroy()
+        c.execute(
+            "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Sex TEXT,Age INTEGER NOT NULL,PhoneNumber INTEGER,Email TEXT PRIMARY KEY,Password TEXT NOT NULL)")
+        c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, n, a, b, pno, v))
+        conn.commit()

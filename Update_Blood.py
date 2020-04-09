@@ -79,7 +79,7 @@ def blood22(a, blood):
 
 def update1(blood, no_bags, cost):
     co.execute("UPDATE User SET No_of_Bags=(?),Cost_per_Bag=(?) WHERE Blood_Group=(?)",
-               (no_bags, cost, blood))
+               (int(no_bags), int(cost), str(blood)))
     conn.commit()
 
 
