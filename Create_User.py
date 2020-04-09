@@ -64,13 +64,13 @@ def Create_User(a):
     Password_box = Entry(toot, show="*")
     Password_box.place(relx=0.47, rely=0.63, height=33, width=200)
 
-    Pass_Label1 = Label(Frame1)
-    Pass_Label1.place(relx=0.30, rely=0.75, height=33, width=200)
-    Pass_Label1.configure(background="#d9d9d9", text=" Confirm Password ", font=("Times", 10), width=1000)
-    Password_box1 = Entry(toot, show="*")
-    Password_box1.place(relx=0.47, rely=0.73, height=33, width=200)
+    Pass_Label2 = Label(Frame1)
+    Pass_Label2.place(relx=0.30, rely=0.75, height=33, width=200)
+    Pass_Label2.configure(background="#d9d9d9", text=" Confirm Password ", font=("Times", 10), width=1000)
+    Password_box2 = Entry(toot, show="*")
+    Password_box2.place(relx=0.47, rely=0.73, height=33, width=200)
     Button_create = Button(Frame1, background="#d9d9d9", text="Register", fg='black', font=("Times", 25), width=200,
-                         command=lambda:inert(name2.get(),v.get(),page2.get(),phonenumber2.get(),l_id.get(),Password_box.get(),toot))
+                         command=lambda:inert(name2.get(),v.get(),page2.get(),phonenumber2.get(),l_id.get(),Password_box.get(),Password_box2.get(),toot))
     Button_create.place(relx=0.47, rely=0.80, height=43, width=200)
     Button_create.configure()
 
@@ -78,10 +78,12 @@ def Create_User(a):
     toot.mainloop()
 
 conn = sqlite3.connect("Blood_Bank.db")
-c = conn.cursor()
+co = conn.cursor()
 
 
-def inert(l, v, n, pno, a, b,r):
+def inert(l, v, n, pno, a, b,c,d):
+    co.execute('Select Email from User where Email=(?)', (a,))
+    already = co.fetchone()
     if not (re.search("[A-Za-z_ ]", l)):
         window = Tk()
         window.withdraw()
@@ -110,6 +112,12 @@ def inert(l, v, n, pno, a, b,r):
         window.destroy()
 
 
+    elif not (already==0):
+        window = Tk()
+        window.withdraw()
+        messagebox.showwarning("popup", "Email already Present")
+        window.destroy()
+
 
     elif not (re.search("[\w@$&_!]{8,14}", b)):
         window = Tk()
@@ -127,8 +135,8 @@ def inert(l, v, n, pno, a, b,r):
         window.destroy()
 
     else:
-        r.destroy()
-        c.execute(
+        d.destroy()
+        co.execute(
             "CREATE TABLE IF NOT EXISTS User(Name TEXT NOT NULL,Sex TEXT,Age INTEGER NOT NULL,PhoneNumber INTEGER,Email TEXT PRIMARY KEY,Password TEXT NOT NULL)")
-        c.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, n, a, b, pno, v))
+        co.execute("INSERT INTO User VALUES(?,?,?,?,?,?)", (l, n, a, b, pno, v))
         conn.commit()
